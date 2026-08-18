@@ -15,13 +15,9 @@ window.SOV_CONFIG = {
     instagramUrl: "https://www.instagram.com/stepsofvalor/"
   },
   links: {
-    registrationUrl: "",
     donationUrl: "https://www.spotfund.com/story/bda2a537-c0e3-43a4-8b0c-3c5d12662fa1?source=s&share_location=c&SFID=mqt8v43sc",
-    volunteerUrl: "",
-    merchUrl: "",
     sponsorInterestUrl: "mailto:kappasiguta@gmail.com?subject=Steps%20of%20Valor%20Sponsorship%20Inquiry",
-    sponsorPacketUrl: "assets/docs/steps-of-valor-sponsor-packet-2026.pdf",
-    checkRegistrationUrl: ""
+    sponsorPacketUrl: "assets/docs/steps-of-valor-sponsor-packet-2026.pdf"
   },
   beneficiaries: {
     militaryHeroes: "https://www.kappasigma.org/military-heroes-campaign/",

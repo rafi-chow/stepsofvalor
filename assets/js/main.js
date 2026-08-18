@@ -11,23 +11,17 @@
       if (value) {
         element.href = value;
         element.removeAttribute("aria-disabled");
-        element.classList.remove("is-placeholder");
         if (/^https?:\/\//.test(value) || /\.pdf(?:$|\?)/i.test(value)) {
           element.target = "_blank";
           element.rel = "noopener";
         }
       } else if (fallback) {
         element.href = fallback;
-        element.classList.add("is-placeholder");
-        element.setAttribute("data-placeholder", "true");
       }
     });
   }
 
-  setExternalLink("[data-link='registration']", links.registrationUrl, "contact.html");
   setExternalLink("[data-link='donation']", links.donationUrl, "contact.html");
-  setExternalLink("[data-link='volunteer']", links.volunteerUrl, "contact.html");
-  setExternalLink("[data-link='merch']", links.merchUrl, "contact.html");
   setExternalLink("[data-link='sponsor-interest']", links.sponsorInterestUrl, "contact.html");
   setExternalLink("[data-link='sponsor-packet']", links.sponsorPacketUrl, "sponsors.html#sponsor-packet-needed");
   setExternalLink("[data-link='military-heroes']", beneficiaries.militaryHeroes, "#");

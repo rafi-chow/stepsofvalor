@@ -18,12 +18,12 @@ Use this before pushing to a public GitHub repo, sending a recruiter link, or de
 - The 9/11 Memorial Stair Climb is described as the current event, not the entire organization.
 - Kappa Sigma Theta Omega is described as a community partner.
 - Confirmed event details are September 11, 2026, University of Texas at Arlington Maverick Stadium, 6:45 AM event-day registration, and 8:03 AM start.
-- Unknown logistics remain clearly marked as coming soon.
+- Unconfirmed logistics are described neutrally until the event team publishes final guidance.
 
 ## Visual quality
 
 - Each page has one clear primary action.
-- Placeholder content is not mixed into finished copy without a clear “coming soon” label.
+- Visitor-facing copy is complete, direct, and free of internal setup notes.
 - Real local photos are used intentionally, not as random decoration.
 - CTAs, cards, spacing, and colors stay consistent across pages.
 - Mobile navigation, text wrapping, and button stacking are checked.

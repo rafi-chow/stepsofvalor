@@ -14,7 +14,7 @@ Confirmed public details:
 - Public contact: `Thaddeus@stepsofvalor.org`
 - Payment, sponsor, and organizer contact: `kappasiguta@gmail.com`
 
-This is intentionally a static-only site: HTML, CSS, JavaScript, and local images. It has no backend, Flask app, database, account system, or custom payment processing. Donation, sponsor, and merchandise links are configured in `assets/js/config.js` and should point only to organizer-approved external services. Event registration is currently day-of only.
+This project is a static website built with HTML, CSS, JavaScript, and local images. Donations use the official Spotfund fundraiser; event registration takes place on site beginning at 6:45 AM.
 
 ## Public GitHub safety
 
@@ -86,18 +86,13 @@ Do not commit Porkbun/FTP credentials. Keep real credentials only in your passwo
 
 ## Before public launch
 
-Update `assets/js/config.js` only when organizer-approved URLs are available:
-
-- `volunteerUrl`
-- `merchUrl`
-
-The donation URL and sponsor packet URL are already configured. Registration is currently handled on event day at 6:45 AM. Until other links are confirmed, related buttons safely route to contact information and display “coming soon.” See `TODO.md` for the remaining organizer decisions.
+The donation URL and sponsor packet URL are maintained in `assets/js/config.js`. Registration is handled at the venue on event day beginning at 6:45 AM. See `ORGANIZER_CHECKLIST.md` for information the event team may add as it is finalized.
 
 ## Project map
 
 - `index.html` — homepage
 - `about.html` — mission and featured coverage
-- `event.html` — confirmed schedule and pending logistics
+- `event.html` — schedule and event-day information
 - `register.html`, `donate.html`, `sponsors.html`, `merch.html` — action pages
 - `gallery.html` — local event photo gallery
 - `faq.html`, `contact.html` — help and official contacts
@@ -106,6 +101,6 @@ The donation URL and sponsor packet URL are already configured. Registration is 
 - `assets/js/main.js` — navigation, link wiring, and current year
 - `assets/docs/steps-of-valor-sponsor-packet-2026.pdf` — local sponsor packet download
 - `netlify.toml` — zero-build Netlify configuration
-- `SECURITY.md`, `PUBLIC_RELEASE_CHECKLIST.md` — public repo safety and launch review notes
+- `SECURITY.md`, `PUBLIC_RELEASE_CHECKLIST.md`, `ORGANIZER_CHECKLIST.md` — maintenance and launch notes
 
 Deployment references: [Netlify Drop documentation](https://docs.netlify.com/start/quickstarts/netlify-drop-quickstart/), [Vercel deployment documentation](https://vercel.com/docs/deployments/deployment-methods), and [Porkbun Static Hosting setup](https://kb.porkbun.com/article/137-how-to-set-up-static-hosting).

@@ -22,10 +22,81 @@
   }
 
   setExternalLink("[data-link='donation']", links.donationUrl, "contact.html");
+  setExternalLink("[data-link='registration']", links.registrationFormUrl, "register.html");
   setExternalLink("[data-link='sponsor-interest']", links.sponsorInterestUrl, "contact.html");
   setExternalLink("[data-link='sponsor-packet']", links.sponsorPacketUrl, "sponsors.html#sponsor-packet-needed");
   setExternalLink("[data-link='military-heroes']", beneficiaries.militaryHeroes, "#");
   setExternalLink("[data-link='arlington-firefighters']", beneficiaries.arlingtonFirefighters, "#");
+
+  function toTallyEmbedUrl(value) {
+    if (!value) return "";
+
+    try {
+      var url = new URL(value, window.location.href);
+      var hostname = url.hostname.replace(/^www\./, "");
+      if (hostname !== "tally.so") return "";
+
+      if (url.pathname.indexOf("/r/") === 0) {
+        url.pathname = url.pathname.replace("/r/", "/embed/");
+      }
+
+      if (url.pathname.indexOf("/embed/") !== 0) return "";
+
+      url.searchParams.set("alignLeft", "1");
+      url.searchParams.set("hideTitle", "1");
+      url.searchParams.set("transparentBackground", "1");
+      url.searchParams.set("dynamicHeight", "1");
+      return url.toString();
+    } catch (error) {
+      return "";
+    }
+  }
+
+  function loadTallyEmbed() {
+    var embed = document.querySelector("[data-tally-registration]");
+    if (!embed) return;
+
+    var iframe = embed.querySelector("iframe");
+    var placeholder = document.querySelector("[data-registration-placeholder]");
+    var externalLink = document.querySelector("[data-registration-open]");
+    var embedUrl = toTallyEmbedUrl(links.registrationFormUrl);
+
+    if (!embedUrl || !iframe) {
+      embed.hidden = true;
+      if (placeholder) placeholder.hidden = false;
+      return;
+    }
+
+    iframe.setAttribute("data-tally-src", embedUrl);
+    iframe.setAttribute("src", embedUrl);
+    embed.hidden = false;
+    if (placeholder) placeholder.hidden = true;
+    if (externalLink) {
+      externalLink.href = links.registrationFormUrl;
+      externalLink.hidden = false;
+      externalLink.target = "_blank";
+      externalLink.rel = "noopener";
+    }
+
+    if (window.Tally && typeof window.Tally.loadEmbeds === "function") {
+      window.Tally.loadEmbeds();
+      return;
+    }
+
+    if (!document.querySelector("script[src='https://tally.so/widgets/embed.js']")) {
+      var script = document.createElement("script");
+      script.src = "https://tally.so/widgets/embed.js";
+      script.async = true;
+      script.onload = function () {
+        if (window.Tally && typeof window.Tally.loadEmbeds === "function") {
+          window.Tally.loadEmbeds();
+        }
+      };
+      document.body.appendChild(script);
+    }
+  }
+
+  loadTallyEmbed();
 
   document.querySelectorAll("[data-email='contact']").forEach(function (element) {
     element.href = "mailto:" + (contact.email || "Thaddeus@stepsofvalor.org");

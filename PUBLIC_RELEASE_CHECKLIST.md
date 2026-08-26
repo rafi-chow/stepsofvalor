@@ -9,6 +9,7 @@ Use this before pushing to a public GitHub repo, sending a recruiter link, or de
 - Any secret that was ever committed has been revoked or rotated.
 - The site stays static: no backend, Flask app, database, login system, or custom payment processing.
 - Donation/payment actions link to the approved external Spotfund page.
+- Registration uses the approved external Tally form embedded in the static site.
 - Sponsor packet PDF is intentionally public and organizer-approved.
 - Event photos are approved for public web use.
 
@@ -17,7 +18,7 @@ Use this before pushing to a public GitHub repo, sending a recruiter link, or de
 - Steps of Valor is described as the organization.
 - The 9/11 Memorial Stair Climb is described as the current event, not the entire organization.
 - Kappa Sigma Theta Omega is described as a community partner.
-- Confirmed event details are September 11, 2026, University of Texas at Arlington Maverick Stadium, 6:45 AM event-day registration, and 8:03 AM start.
+- Confirmed event details are September 11, 2026, University of Texas at Arlington Maverick Stadium, 6:45 AM event-day check-in, and 8:03 AM start.
 - Unconfirmed logistics are described neutrally until the event team publishes final guidance.
 
 ## Visual quality
@@ -58,6 +59,7 @@ Open `http://localhost:8000`, then check:
 Also confirm:
 
 - Spotfund opens in a new tab.
+- The embedded registration form loads, and the fallback registration link opens the Tally form.
 - Sponsor packet opens or downloads.
 - No broken image references appear.
 - Mobile layout works at phone width.

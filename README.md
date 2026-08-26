@@ -6,7 +6,7 @@ Confirmed public details:
 
 - Event: 2026 Steps of Valor 9/11 Memorial Stair Climb
 - Date: September 11, 2026
-- Event registration opens: 6:45 AM
+- Event-day check-in opens: 6:45 AM
 - Climb begins: 8:03 AM
 - Venue: University of Texas at Arlington Maverick Stadium, 1307 W Mitchell St, Arlington, TX 76013
 - Donation link: Spotfund fundraiser configured in `assets/js/config.js`
@@ -14,7 +14,7 @@ Confirmed public details:
 - Public contact: `Thaddeus@stepsofvalor.org`
 - Payment, sponsor, and organizer contact: `kappasiguta@gmail.com`
 
-This project is a static website built with HTML, CSS, JavaScript, and local images. Donations use the official Spotfund fundraiser; event registration takes place on site beginning at 6:45 AM.
+This project is a static website built with HTML, CSS, JavaScript, and local images. Donations use the official Spotfund fundraiser; participant registration uses an embedded Tally form, with event-day check-in beginning at 6:45 AM.
 
 ## Public GitHub safety
 
@@ -84,9 +84,34 @@ Porkbun Static Hosting accepts plain HTML/CSS/JS sites like this one.
 
 Do not commit Porkbun/FTP credentials. Keep real credentials only in your password manager or a local ignored file.
 
+## Registration form
+
+Registration is handled through Tally and embedded on `register.html`.
+
+- Public form URL: `https://tally.so/r/yP5dO8`
+- Embedded form URL: `https://tally.so/embed/yP5dO8`
+- The form collects full name, email, optional phone number, optional organization, and an event agreement checkbox.
+- Submissions are available in the Tally dashboard for the `2026 Steps of Valor Registration` form.
+
+If the final site moves to `https://www.stepsofvalor.org/`, no backend migration is needed. Keep the Tally form URL in `assets/js/config.js`; the embed will work from the new domain.
+
+## Free check-in desk
+
+The repo includes a free Google Sheets check-in tool in `tools/checkin-appscript/`.
+
+Use it after the Tally form is connected to Google Sheets:
+
+1. Open the registration Google Sheet.
+2. Go to **Extensions → Apps Script**.
+3. Paste in `tools/checkin-appscript/Code.gs` and `tools/checkin-appscript/Index.html`.
+4. Run `setupCheckInSheet` once and approve permissions.
+5. Reload the Sheet, then open **Steps of Valor → Open Check-In Desk**.
+
+This creates a private staff search-and-check-in panel backed by the Sheet. It is faster than manually scanning rows and stays free.
+
 ## Before public launch
 
-The donation URL and sponsor packet URL are maintained in `assets/js/config.js`. Registration is handled at the venue on event day beginning at 6:45 AM. See `ORGANIZER_CHECKLIST.md` for information the event team may add as it is finalized.
+The donation URL, registration form URL, and sponsor packet URL are maintained in `assets/js/config.js`. Event-day check-in begins at 6:45 AM. See `ORGANIZER_CHECKLIST.md` for information the event team may add as it is finalized.
 
 ## Project map
 
@@ -95,11 +120,12 @@ The donation URL and sponsor packet URL are maintained in `assets/js/config.js`.
 - `event.html` — schedule and event-day information
 - `register.html`, `donate.html`, `sponsors.html`, `merch.html` — action pages
 - `gallery.html` — local event photo gallery
-- `faq.html`, `contact.html` — help and official contacts
+- `faq.html`, `contact.html`, `privacy.html` — help, official contacts, and privacy policy
 - `assets/css/style.css` — shared visual system and responsive rules
 - `assets/js/config.js` — external links and shared contact values
 - `assets/js/main.js` — navigation, link wiring, and current year
 - `assets/docs/steps-of-valor-sponsor-packet-2026.pdf` — local sponsor packet download
+- `tools/checkin-appscript/` — optional internal Google Sheets check-in desk
 - `netlify.toml` — zero-build Netlify configuration
 - `SECURITY.md`, `PUBLIC_RELEASE_CHECKLIST.md`, `ORGANIZER_CHECKLIST.md` — maintenance and launch notes
 

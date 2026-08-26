@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root {
+      --navy: #071525;
+      --blue: #123759;
+      --red: #a6232c;
+      --gold: #d6a84b;
+      --ink: #152033;
+      --muted: #5b6879;
+      --line: #dce3eb;
+      --soft: #f5f7fa;
+      --success: #176b3a;
+      --danger: #8e1b23;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: #fff;
+      font: 15px/1.5 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .app {
+      min-height: 100vh;
+      background:
+        linear-gradient(180deg, rgba(7,21,37,.04), transparent 220px),
+        #fff;
+    }
+
+    header {
+      padding: 18px 18px 16px;
+      color: #fff;
+      background:
+        linear-gradient(135deg, rgba(7,21,37,.98), rgba(18,55,89,.95));
+      border-bottom: 4px solid var(--red);
+    }
+
+    h1, h2, h3, p { margin: 0; }
+
+    h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 28px;
+      line-height: 1.05;
+      letter-spacing: -.02em;
+    }
+
+    header p {
+      margin-top: 7px;
+      color: #dce5ee;
+      font-size: 13px;
+    }
+
+    main { padding: 16px; }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+      box-shadow: 0 10px 26px rgba(7,21,37,.08);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .stat {
+      padding: 12px 10px;
+      text-align: center;
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--navy);
+      font-size: 24px;
+      line-height: 1;
+    }
+
+    .stat span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .controls {
+      display: grid;
+      gap: 10px;
+      padding: 14px;
+      margin-bottom: 14px;
+    }
+
+    label {
+      display: grid;
+      gap: 5px;
+      color: var(--navy);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    input {
+      width: 100%;
+      min-height: 42px;
+      padding: 10px 12px;
+      border: 1px solid #cfd9e4;
+      border-radius: 10px;
+      color: var(--ink);
+      font: 600 15px/1.3 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    input:focus {
+      border-color: var(--blue);
+      outline: 3px solid rgba(214,168,75,.28);
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    button {
+      min-height: 40px;
+      padding: 9px 13px;
+      border: 0;
+      border-radius: 999px;
+      color: #fff;
+      background: var(--red);
+      font: 800 13px/1 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      cursor: pointer;
+    }
+
+    button.secondary {
+      color: var(--navy);
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+
+    button.gold {
+      color: var(--navy);
+      background: var(--gold);
+    }
+
+    button.danger {
+      background: var(--danger);
+    }
+
+    button:disabled {
+      cursor: not-allowed;
+      opacity: .55;
+    }
+
+    .message {
+      display: none;
+      padding: 10px 12px;
+      margin-bottom: 12px;
+      border-radius: 10px;
+      color: var(--muted);
+      background: var(--soft);
+    }
+
+    .message.visible { display: block; }
+    .message.error { color: var(--danger); background: #fff1f1; }
+    .message.success { color: var(--success); background: #eef8f1; }
+
+    .results {
+      display: grid;
+      gap: 10px;
+    }
+
+    .result {
+      padding: 14px;
+      border-top: 4px solid var(--red);
+    }
+
+    .result.checked {
+      border-top-color: var(--success);
+      background: linear-gradient(180deg, #f6fbf8, #fff);
+    }
+
+    .result h3 {
+      color: var(--navy);
+      font-size: 18px;
+      line-height: 1.15;
+    }
+
+    .meta {
+      display: grid;
+      gap: 2px;
+      margin: 8px 0 12px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .badge {
+      display: inline-flex;
+      width: max-content;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      color: #724d00;
+      background: #fff5dc;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+
+    .badge.checked {
+      color: var(--success);
+      background: #e9f7ef;
+    }
+
+    .empty {
+      padding: 22px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .privacy {
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .auth {
+      display: none;
+      padding: 14px;
+      margin-bottom: 14px;
+      border-top: 4px solid var(--gold);
+    }
+
+    .auth.visible { display: grid; gap: 10px; }
+
+    @media (min-width: 680px) {
+      body { font-size: 16px; }
+      main { max-width: 920px; margin: 0 auto; padding: 22px; }
+      .results { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .controls { grid-template-columns: 1fr 1.5fr; align-items: end; }
+      .controls .button-row { grid-column: 1 / -1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>Steps of Valor Check-In</h1>
+      <p>Private staff tool for the 2026 9/11 Memorial Stair Climb.</p>
+    </header>
+
+    <main>
+      <section class="stats" aria-label="Check-in totals">
+        <div class="card stat"><strong id="registeredCount">—</strong><span>Registered</span></div>
+        <div class="card stat"><strong id="checkedCount">—</strong><span>Checked in</span></div>
+        <div class="card stat"><strong id="remainingCount">—</strong><span>Remaining</span></div>
+      </section>
+
+      <section class="card auth" id="authPanel">
+        <label>Staff passcode
+          <input id="passcodeInput" type="password" autocomplete="off" placeholder="Enter event staff passcode">
+        </label>
+        <div class="button-row">
+          <button class="gold" id="unlockButton" type="button">Unlock Check-In</button>
+        </div>
+      </section>
+
+      <section class="card controls">
+        <label>Staff name or initials
+          <input id="staffInput" type="text" autocomplete="name" placeholder="Example: TC or front table">
+        </label>
+        <label>Search registrants
+          <input id="searchInput" type="search" autocomplete="off" placeholder="Type name, email, phone, or organization">
+        </label>
+        <div class="button-row">
+          <button id="refreshButton" class="secondary" type="button">Refresh</button>
+          <button id="setupButton" class="secondary" type="button">Prepare Columns</button>
+        </div>
+      </section>
+
+      <div class="message" id="message"></div>
+      <section class="results" id="results" aria-live="polite">
+        <div class="card empty">Type at least 2 characters to find a registration.</div>
+      </section>
+
+      <p class="privacy">Staff reminder: use this only for event check-in. Do not share the registration Sheet, this tool, or participant information outside the organizer team.</p>
+    </main>
+  </div>
+
+  <script>
+    const APP_MODE = "<?= appMode ?>";
+    const state = {
+      passcode: "",
+      lastQuery: "",
+      searchTimer: null,
+      busyRows: new Set()
+    };
+
+    const els = {
+      registeredCount: document.getElementById("registeredCount"),
+      checkedCount: document.getElementById("checkedCount"),
+      remainingCount: document.getElementById("remainingCount"),
+      authPanel: document.getElementById("authPanel"),
+      passcodeInput: document.getElementById("passcodeInput"),
+      unlockButton: document.getElementById("unlockButton"),
+      staffInput: document.getElementById("staffInput"),
+      searchInput: document.getElementById("searchInput"),
+      refreshButton: document.getElementById("refreshButton"),
+      setupButton: document.getElementById("setupButton"),
+      message: document.getElementById("message"),
+      results: document.getElementById("results")
+    };
+
+    function runServer(name, ...args) {
+      return new Promise((resolve, reject) => {
+        google.script.run
+          .withSuccessHandler(resolve)
+          .withFailureHandler(error => reject(new Error(error && error.message ? error.message : String(error))))
+          [name](...args);
+      });
+    }
+
+    function escapeHtml(value) {
+      return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function setMessage(text, type = "") {
+      els.message.textContent = text || "";
+      els.message.className = "message" + (text ? " visible" : "") + (type ? " " + type : "");
+    }
+
+    function updateStats(stats) {
+      if (!stats) return;
+      els.registeredCount.textContent = stats.registered;
+      els.checkedCount.textContent = stats.checkedIn;
+      els.remainingCount.textContent = stats.remaining;
+    }
+
+    function showAuth() {
+      els.authPanel.classList.add("visible");
+      els.passcodeInput.focus();
+    }
+
+    function hideAuth() {
+      els.authPanel.classList.remove("visible");
+    }
+
+    function setLoading(isLoading) {
+      els.refreshButton.disabled = isLoading;
+      els.setupButton.disabled = isLoading;
+      els.searchInput.disabled = isLoading;
+    }
+
+    function metaLine(label, value) {
+      if (!value) return "";
+      return `<span><strong>${escapeHtml(label)}:</strong> ${escapeHtml(value)}</span>`;
+    }
+
+    function renderResults(results, message) {
+      if (!results || !results.length) {
+        els.results.innerHTML = `<div class="card empty">${escapeHtml(message || "No matching registrations found.")}</div>`;
+        return;
+      }
+
+      els.results.innerHTML = results.map(registrant => {
+        const row = String(registrant.rowNumber);
+        const checked = Boolean(registrant.checkedIn);
+        const busy = state.busyRows.has(row);
+        const status = checked
+          ? `<span class="badge checked">Checked in${registrant.checkInTime ? " · " + escapeHtml(registrant.checkInTime) : ""}</span>`
+          : `<span class="badge">Not checked in</span>`;
+        const action = checked
+          ? `<button class="secondary" type="button" data-undo="${row}" ${busy ? "disabled" : ""}>Undo</button>`
+          : `<button type="button" data-checkin="${row}" ${busy ? "disabled" : ""}>Check In</button>`;
+
+        return `
+          <article class="card result ${checked ? "checked" : ""}" data-row="${row}">
+            ${status}
+            <h3>${escapeHtml(registrant.name)}</h3>
+            <div class="meta">
+              ${metaLine("Email", registrant.email)}
+              ${metaLine("Phone", registrant.phone)}
+              ${metaLine("Organization", registrant.organization)}
+              ${metaLine("Checked in by", registrant.checkedInBy)}
+              ${metaLine("Notes", registrant.notes)}
+            </div>
+            <div class="button-row">${action}</div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    async function initialize() {
+      els.staffInput.value = localStorage.getItem("sov-checkin-staff") || "";
+      setLoading(true);
+
+      try {
+        const data = await runServer("getInitialState", state.passcode);
+        updateStats(data.stats);
+        hideAuth();
+        setMessage(`Connected to ${data.spreadsheetName} · ${data.sheetName}`, "success");
+      } catch (error) {
+        if (/passcode/i.test(error.message)) {
+          showAuth();
+          setMessage("Enter the staff passcode to continue.", "error");
+        } else {
+          setMessage(error.message, "error");
+        }
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    async function refreshSearch() {
+      const query = els.searchInput.value.trim();
+      state.lastQuery = query;
+
+      if (query.length < 2) {
+        renderResults([], "Type at least 2 characters to find a registration.");
+      }
+
+      setLoading(true);
+      try {
+        const data = await runServer("searchRegistrants", query, state.passcode);
+        updateStats(data.stats);
+        renderResults(data.results, data.message);
+        if (data.limited) {
+          setMessage(`Showing first ${data.results.length} of ${data.totalMatches} matches. Type more letters to narrow the search.`);
+        } else {
+          setMessage(data.message || "");
+        }
+      } catch (error) {
+        if (/passcode/i.test(error.message)) showAuth();
+        setMessage(error.message, "error");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    async function setupColumns() {
+      setLoading(true);
+      try {
+        const data = await runServer("setupCheckInSheet", state.passcode);
+        updateStats(data.stats);
+        hideAuth();
+        setMessage("Check-in columns are ready.", "success");
+      } catch (error) {
+        if (/passcode/i.test(error.message)) showAuth();
+        setMessage(error.message, "error");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    async function checkIn(rowNumber) {
+      const staffName = els.staffInput.value.trim();
+      localStorage.setItem("sov-checkin-staff", staffName);
+      state.busyRows.add(String(rowNumber));
+      refreshSearch();
+
+      try {
+        const data = await runServer("checkInRegistrant", rowNumber, staffName, "", state.passcode);
+        updateStats(data.stats);
+        setMessage(`${data.registrant.name} is checked in.`, "success");
+      } catch (error) {
+        if (/passcode/i.test(error.message)) showAuth();
+        setMessage(error.message, "error");
+      } finally {
+        state.busyRows.delete(String(rowNumber));
+        refreshSearch();
+      }
+    }
+
+    async function undo(rowNumber) {
+      if (!confirm("Undo this check-in?")) return;
+      state.busyRows.add(String(rowNumber));
+      refreshSearch();
+
+      try {
+        const data = await runServer("undoCheckIn", rowNumber, state.passcode);
+        updateStats(data.stats);
+        setMessage(`${data.registrant.name} is marked not checked in.`, "success");
+      } catch (error) {
+        if (/passcode/i.test(error.message)) showAuth();
+        setMessage(error.message, "error");
+      } finally {
+        state.busyRows.delete(String(rowNumber));
+        refreshSearch();
+      }
+    }
+
+    els.searchInput.addEventListener("input", () => {
+      window.clearTimeout(state.searchTimer);
+      state.searchTimer = window.setTimeout(refreshSearch, 250);
+    });
+
+    els.refreshButton.addEventListener("click", refreshSearch);
+    els.setupButton.addEventListener("click", setupColumns);
+
+    els.unlockButton.addEventListener("click", () => {
+      state.passcode = els.passcodeInput.value;
+      initialize().then(refreshSearch);
+    });
+
+    els.passcodeInput.addEventListener("keydown", event => {
+      if (event.key === "Enter") {
+        state.passcode = els.passcodeInput.value;
+        initialize().then(refreshSearch);
+      }
+    });
+
+    els.results.addEventListener("click", event => {
+      const checkInButton = event.target.closest("[data-checkin]");
+      const undoButton = event.target.closest("[data-undo]");
+      if (checkInButton) checkIn(checkInButton.dataset.checkin);
+      if (undoButton) undo(undoButton.dataset.undo);
+    });
+
+    initialize();
+  </script>
+</body>
+</html>

@@ -18,6 +18,7 @@ Do not publish inherited Git history unless it has been fully audited. If a cred
 - Public contact email: `Thaddeus@stepsofvalor.org`
 - Payment, sponsor, and organizer email: `kappasiguta@gmail.com`
 - Spotfund fundraiser URL
+- Tally registration form URL
 - 2026 sponsor packet PDF, approved for public release by the organizer
 - Local event photos already selected for the site
 

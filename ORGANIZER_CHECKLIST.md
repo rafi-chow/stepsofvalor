@@ -5,9 +5,10 @@ This file is for the Steps of Valor team. It is not intended as website copy.
 ## Already published
 
 - The official Spotfund fundraiser.
+- The Tally participant registration form.
 - The 2026 sponsor packet PDF.
 - The September 11, 2026 event schedule and Maverick Stadium location.
-- Event-day registration beginning at 6:45 AM.
+- Event-day check-in beginning at 6:45 AM.
 - The public contact and organizer contacts.
 
 ## Add when finalized
@@ -17,8 +18,15 @@ This file is for the Steps of Valor team. It is not intended as website copy.
 - Approved sponsor logos.
 - Merchandise photos, pricing, ordering details, and deadlines.
 - Verified attendance, fundraising, or mission-impact figures.
-- A privacy policy if the website begins collecting information directly.
+- A fuller privacy policy if organizers want more formal public language around registration data use.
 - Analytics, if the team decides to use them.
+
+## Check-in setup
+
+- Connect the Tally registration form to a private Google Sheet.
+- Install the Apps Script check-in desk from `tools/checkin-appscript/`.
+- Share the registration Sheet only with event staff who need check-in access.
+- Test search and check-in before event day with a non-real test row, then delete the test row.
 
 ## Repository safety
 

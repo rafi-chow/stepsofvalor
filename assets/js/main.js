@@ -23,6 +23,7 @@
 
   setExternalLink("[data-link='donation']", links.donationUrl, "contact.html");
   setExternalLink("[data-link='registration']", links.registrationFormUrl, "register.html");
+  setExternalLink("[data-link='uta-waiver']", links.utaWaiverUrl, "register.html");
   setExternalLink("[data-link='sponsor-interest']", links.sponsorInterestUrl, "contact.html");
   setExternalLink("[data-link='sponsor-packet']", links.sponsorPacketUrl, "sponsors.html#sponsor-packet-needed");
   setExternalLink("[data-link='military-heroes']", beneficiaries.militaryHeroes, "#");
@@ -97,6 +98,35 @@
   }
 
   loadTallyEmbed();
+
+  function scrollToWaiverStep() {
+    var waiverStep = document.querySelector("[data-waiver-step]");
+    if (!waiverStep) return;
+
+    waiverStep.scrollIntoView({ behavior: "smooth", block: "start" });
+    window.setTimeout(function () {
+      waiverStep.focus({ preventScroll: true });
+    }, 650);
+  }
+
+  window.addEventListener("message", function (event) {
+    if (!event.origin || event.origin.replace(/^https?:\/\//, "").replace(/^www\./, "") !== "tally.so") return;
+
+    var eventName = "";
+    if (typeof event.data === "string") {
+      if (event.data.indexOf("Tally.FormSubmitted") !== -1) {
+        eventName = "Tally.FormSubmitted";
+      }
+    } else if (event.data && typeof event.data === "object") {
+      eventName = event.data.event || event.data.type || event.data.name || "";
+    }
+
+    if (eventName === "Tally.FormSubmitted") {
+      scrollToWaiverStep();
+    }
+  });
+
+  window.addEventListener("Tally.FormSubmitted", scrollToWaiverStep);
 
   document.querySelectorAll("[data-email='contact']").forEach(function (element) {
     element.href = "mailto:" + (contact.email || "Thaddeus@stepsofvalor.org");

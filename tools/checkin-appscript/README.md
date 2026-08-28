@@ -4,6 +4,8 @@ Free internal check-in tool for the 2026 Steps of Valor registration Google Shee
 
 This is not part of the public website and does not add a backend to the site. It is a Google Apps Script sidebar that runs inside the registration Sheet.
 
+The public website uses a two-step participant flow: Steps of Valor event registration through Tally, then the required UTA MavEngage Participant Release and Indemnification Agreement. This check-in tool uses the Tally/Google Sheets registration list. If the event team needs to verify waiver completion at check-in, use the official UTA/MavEngage export or access method alongside this Sheet.
+
 ## What it does
 
 - Searches registrations by name, email, phone number, or organization.

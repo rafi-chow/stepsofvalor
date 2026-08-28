@@ -14,7 +14,7 @@ Confirmed public details:
 - Public contact: `Thaddeus@stepsofvalor.org`
 - Payment, sponsor, and organizer contact: `kappasiguta@gmail.com`
 
-This project is a static website built with HTML, CSS, JavaScript, and local images. Donations use the official Spotfund fundraiser; participant registration uses an embedded Tally form, with event-day check-in beginning at 6:45 AM.
+This project is a static website built with HTML, CSS, JavaScript, and local images. Donations use the official Spotfund fundraiser; participant registration uses an embedded Tally form plus a required UTA MavEngage participant waiver, with event-day check-in beginning at 6:45 AM.
 
 ## Public GitHub safety
 
@@ -84,22 +84,26 @@ Porkbun Static Hosting accepts plain HTML/CSS/JS sites like this one.
 
 Do not commit Porkbun/FTP credentials. Keep real credentials only in your password manager or a local ignored file.
 
-## Registration form
+## Registration and required UTA waiver
 
-Registration is handled through Tally and embedded on `register.html`.
+Participant registration is a two-step flow on `register.html`.
 
 - Public form URL: `https://tally.so/r/yP5dO8`
 - Embedded form URL: `https://tally.so/embed/yP5dO8`
+- Required UTA waiver URL: `https://mavengage.uta.edu/submitter/form/step/1?Guid=99b4c727-5b16-4068-b7eb-c6b6f0b80c61`
 - The form collects full name, email, optional phone number, optional organization, and an event agreement checkbox.
 - Submissions are available in the Tally dashboard for the `2026 Steps of Valor Registration` form.
+- Every participant must also complete the UTA MavEngage Participant Release and Indemnification Agreement.
 
-If the final site moves to `https://www.stepsofvalor.org/`, no backend migration is needed. Keep the Tally form URL in `assets/js/config.js`; the embed will work from the new domain.
+The Tally form is the organizer/check-in list. The UTA MavEngage form is the required participant waiver. Keep both URLs in `assets/js/config.js`; no backend migration is needed.
+
+MavEngage blocks off-site iframe embedding with browser security headers, so the website links participants to the secure UTA-hosted waiver instead of trying to display it inline.
 
 ## Free check-in desk
 
 The repo includes a free Google Sheets check-in tool in `tools/checkin-appscript/`.
 
-Use it after the Tally form is connected to Google Sheets:
+Use it after the Tally form is connected to Google Sheets. If organizers need to verify waiver completion at check-in, export or access the MavEngage waiver records separately through UTA/MavEngage.
 
 1. Open the registration Google Sheet.
 2. Go to **Extensions → Apps Script**.

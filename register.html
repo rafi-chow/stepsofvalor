@@ -11,31 +11,42 @@
   <link rel="icon" href="assets/images/favicon.png" type="image/png">
   <link rel="shortcut icon" href="favicon.ico">
   <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
-  <link rel="stylesheet" href="assets/css/style.css?v=20260826-4">
+  <link rel="stylesheet" href="assets/css/style.css?v=20260828-1">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="top-strip"><div class="container"><span>September 11, 2026 · Check-in 6:45 AM · Start 8:03 AM</span><span><a data-link="instagram" href="https://www.instagram.com/stepsofvalor/">Instagram</a> · <a data-email="contact" href="mailto:Thaddeus@stepsofvalor.org">Thaddeus@stepsofvalor.org</a></span></div></div>
   <header class="site-header"><div class="container header-inner"><a class="brand" href="index.html" aria-label="Steps of Valor home"><span class="brand-logo" aria-hidden="true"><img src="assets/images/steps-of-valor-emblem-transparent.png" alt=""></span><span class="brand-text"><span class="brand-name">Steps of Valor</span><span class="brand-subtitle">First Responder Support</span></span></a><button class="menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" data-menu-toggle>Menu</button><nav class="site-nav" aria-label="Primary navigation" data-site-nav><a data-current href="index.html">Home</a><a data-current href="about.html">About</a><a data-current href="event.html">Event</a><a data-current href="register.html">Register</a><a data-current href="donate.html">Donate</a><a data-current href="sponsors.html">Sponsors</a><a data-current href="merch.html">Merch</a><a data-current href="gallery.html">Gallery</a><a data-current href="faq.html">FAQ</a><a data-current href="contact.html">Contact</a></nav></div></header>
   <main id="main">
-    <section class="page-hero"><div class="container"><p class="eyebrow">Register</p><h1>Register for the 2026 Steps of Valor climb.</h1><p>Join us September 11, 2026 at Maverick Stadium. Complete the form below so the event team can plan for participants, groups, and event-day communication.</p></div></section>
+    <section class="page-hero"><div class="container"><p class="eyebrow">Register</p><h1>Complete both required registration steps.</h1><p>Join us September 11, 2026 at Maverick Stadium. Every participant must complete the Steps of Valor event registration and the required UTA participant waiver before attending.</p></div></section>
     <section class="section">
-      <div class="container feature-band registration-layout">
-        <div>
-          <p class="eyebrow">Participant registration</p>
-          <h2>Let the event team know you plan to climb.</h2>
-          <p>Use this short registration form for the 2026 Steps of Valor 9/11 Memorial Stair Climb. Please still check in at Maverick Stadium on event day beginning at 6:45 AM.</p>
-          <p><strong>Venue:</strong> University of Texas at Arlington Maverick Stadium, 1307 W Mitchell St, Arlington, TX 76013.</p>
-          <div class="button-row">
-            <a class="btn btn-primary" href="event.html">Review Event Details</a>
-            <a class="btn btn-outline" href="contact.html">Contact with Questions</a>
-          </div>
+      <div class="container">
+        <div class="section-header center">
+          <p class="eyebrow">Two required steps</p>
+          <h2>Register with Steps of Valor, then complete the UTA waiver.</h2>
+          <p>Your event registration helps organizers plan check-in and communication. The UTA MavEngage waiver is a separate required release for everyone attending.</p>
         </div>
-        <div class="card registration-panel">
+        <div class="registration-steps" aria-label="Registration steps">
+          <article class="step-card card accent-card">
+            <div class="step-marker" aria-hidden="true">1</div>
+            <h3>Event registration</h3>
+            <p>Share your name, email, optional phone number, and optional organization so the Steps of Valor team can plan for participants, groups, and event-day updates.</p>
+          </article>
+          <article class="step-card card gold-card">
+            <div class="step-marker" aria-hidden="true">2</div>
+            <h3>Required UTA waiver</h3>
+            <p>Complete the official UTA MavEngage Participant Release and Indemnification Agreement. Your registration is not complete until both steps are finished.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+    <section class="section section-soft">
+      <div class="container registration-stack">
+        <article class="card registration-panel">
           <div class="form-header">
-            <p class="eyebrow">Online registration</p>
-            <h3>Register below.</h3>
-            <p>The form asks for name, email, optional phone number, and optional organization. Submissions are used for event planning and event updates.</p>
+            <p class="eyebrow">Step 1 of 2</p>
+            <h2>Register with Steps of Valor.</h2>
+            <p>Complete this short event registration first. Submissions go to the Steps of Valor organizer list for event planning, communication, and check-in.</p>
           </div>
           <div class="tally-embed" data-tally-registration>
             <iframe title="2026 Steps of Valor registration form" loading="lazy" width="100%" height="720" frameborder="0" marginheight="0" marginwidth="0" src="https://tally.so/embed/yP5dO8?alignLeft=1&amp;hideTitle=1&amp;transparentBackground=1&amp;dynamicHeight=1"></iframe>
@@ -48,7 +59,29 @@
             <a class="btn btn-outline" data-registration-open href="https://tally.so/r/yP5dO8" target="_blank" rel="noopener">Open Registration Form</a>
           </div>
           <p class="privacy-note">By submitting the registration form, you agree that Steps of Valor may use your information for event planning and event updates. Read the <a href="privacy.html">Privacy Policy</a>.</p>
-        </div>
+        </article>
+        <article class="card registration-panel waiver-panel" id="uta-waiver" data-waiver-step tabindex="-1">
+          <div class="form-header">
+            <p class="eyebrow">Step 2 of 2 · Required</p>
+            <h2>Complete the UTA participant waiver.</h2>
+            <p>UTA requires every participant to complete the official MavEngage Participant Release and Indemnification Agreement. Complete this after submitting Step 1.</p>
+          </div>
+          <div class="callout compact-callout">
+            <strong>Your registration is not complete until both steps are finished.</strong>
+            <span>After submitting Step 1, use the button below to open the secure UTA MavEngage waiver.</span>
+          </div>
+          <div class="waiver-action">
+            <div>
+              <span class="status-pill">UTA MavEngage</span>
+              <h3>Official participant release</h3>
+              <p>The waiver opens in a new secure UTA MavEngage tab. Return to this site afterward for event details, donation, sponsor, and contact information.</p>
+            </div>
+            <div class="button-row">
+              <a class="btn btn-primary" data-link="uta-waiver" href="https://mavengage.uta.edu/submitter/form/step/1?Guid=99b4c727-5b16-4068-b7eb-c6b6f0b80c61" target="_blank" rel="noopener">Complete Required UTA Waiver</a>
+              <a class="btn btn-outline" href="event.html">Review Event Details</a>
+            </div>
+          </div>
+        </article>
       </div>
     </section>
     <section class="section section-soft">

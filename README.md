@@ -109,7 +109,8 @@ Use it after the Tally form is connected to Google Sheets. If organizers need to
 2. Go to **Extensions → Apps Script**.
 3. Paste in `tools/checkin-appscript/Code.gs` and `tools/checkin-appscript/Index.html`.
 4. Run `setupCheckInSheet` once and approve permissions.
-5. Reload the Sheet, then open **Steps of Valor → Open Check-In Desk**.
+5. Run `installDayOfCheckInAutomation` once. This schedules an event-day-only check that marks new September 11 Tally submissions checked in automatically within about one minute.
+6. Reload the Sheet, then open **Steps of Valor → Open Check-In Desk**.
 
 This creates a private staff search-and-check-in panel backed by the Sheet. It is faster than manually scanning rows and stays free.
 
@@ -130,6 +131,8 @@ The donation URL, registration form URL, and sponsor packet URL are maintained i
 - `assets/js/main.js` — navigation, link wiring, and current year
 - `assets/docs/steps-of-valor-sponsor-packet-2026.pdf` — local sponsor packet download
 - `tools/checkin-appscript/` — optional internal Google Sheets check-in desk
+- `output/pdf/steps-of-valor-day-of-registration-qr-sign.pdf` — print-ready day-of registration sign
+- `tools/generate-day-of-registration-sign.py` — regenerates the QR sign for the permanent website URL
 - `netlify.toml` — zero-build Netlify configuration
 - `SECURITY.md`, `PUBLIC_RELEASE_CHECKLIST.md`, `ORGANIZER_CHECKLIST.md` — maintenance and launch notes
 

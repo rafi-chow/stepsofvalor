@@ -11,6 +11,7 @@ The public website uses a two-step participant flow: Steps of Valor event regist
 - Searches registrations by name, email, phone number, or organization.
 - Adds one-tap check-in.
 - Writes check-in status back to the Google Sheet.
+- Automatically checks in registrations submitted on September 11, 2026, while leaving advance registrations for staff to check in when they arrive.
 - Automatically adds these columns if missing:
   - `Checked In`
   - `Check-in Time`
@@ -30,16 +31,20 @@ The public website uses a two-step participant flow: Steps of Valor event regist
 8. Optional: paste `appsscript.json` into the project manifest if you use Apps Script project settings.
 9. Save the project.
 10. Run `setupCheckInSheet` once from the Apps Script editor and approve the requested Google permissions.
-11. Reload the Google Sheet.
-12. Use **Steps of Valor → Open Check-In Desk** from the Google Sheet menu.
+11. Run `installDayOfCheckInAutomation` once and approve the requested trigger permission. This schedules the private automation to activate just after midnight on September 11.
+12. Reload the Google Sheet.
+13. Use **Steps of Valor → Open Check-In Desk** from the Google Sheet menu.
 
 ## Day-of workflow
 
-1. Open the registration Google Sheet on a laptop or tablet.
-2. Click **Steps of Valor → Open Check-In Desk**.
-3. Type the participant’s name, email, phone, or organization.
-4. Click **Check In**.
-5. The Sheet updates immediately with check-in status and time.
+1. Place the printable day-of registration QR sign at the registration area.
+2. People who scan it complete the Steps of Valor form and the required UTA waiver.
+3. A registration submitted on September 11 is marked checked in automatically within about one minute.
+4. Advance registrants still check in with staff. Open **Steps of Valor → Open Check-In Desk**, search by name, email, phone, or organization, and click **Check In**.
+
+The automation uses the `Submitted at` value in the Sheet's `America/Chicago` timezone. It records the submission time as the check-in time and labels the check-in source `Day-of QR registration`. The one-minute trigger runs only on September 11 and removes itself after event day, protecting the free Apps Script quota.
+
+Print `output/pdf/steps-of-valor-day-of-registration-qr-sign.pdf`. Its QR code opens `https://www.stepsofvalor.org/register?source=day-of`, which shows event-day instructions while preserving the normal two-step registration flow.
 
 This is much faster than manually scanning a spreadsheet, but it stays free and keeps Google Sheets as the source of truth.
 

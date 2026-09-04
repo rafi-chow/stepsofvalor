@@ -99,6 +99,16 @@
 
   loadTallyEmbed();
 
+  try {
+    if (new URLSearchParams(window.location.search).get("source") === "day-of") {
+      document.querySelectorAll("[data-day-of-registration-notice]").forEach(function (notice) {
+        notice.hidden = false;
+      });
+    }
+  } catch (error) {
+    // The standard registration page works even if URLSearchParams is unavailable.
+  }
+
   function scrollToWaiverStep() {
     var waiverStep = document.querySelector("[data-waiver-step]");
     if (!waiverStep) return;

@@ -7,6 +7,15 @@
  */
 
 var SOV_CHECKIN = {
+  event: {
+    date: "2026-09-11",
+    timezone: "America/Chicago",
+    activationTime: "2026-09-11T00:01:00-05:00",
+    autoCheckInLabel: "Day-of QR registration",
+    autoCheckInNote: "Automatically checked in from day-of registration.",
+    schedulerHandler: "startDayOfCheckInAutomation",
+    triggerHandler: "processDayOfRegistrations"
+  },
   scriptProperties: {
     sheetName: "SOV_REGISTRATION_SHEET_NAME",
     passcode: "SOV_CHECKIN_PASSCODE",
@@ -24,6 +33,7 @@ var SOV_CHECKIN = {
     notes: "Check-in Notes"
   },
   aliases: {
+    submittedAt: ["submitted at", "submission time", "timestamp", "date submitted"],
     fullName: ["full name", "name", "participant name", "registrant name"],
     firstName: ["first name", "first"],
     lastName: ["last name", "last", "surname"],
@@ -43,7 +53,143 @@ function onOpen() {
     .createMenu("Steps of Valor")
     .addItem("Open Check-In Desk", "openCheckInDesk")
     .addItem("Prepare Check-In Columns", "setupCheckInSheet")
+    .addSeparator()
+    .addItem("Install Day-of Auto Check-In", "installDayOfCheckInAutomation")
+    .addItem("Run Day-of Auto Check-In Now", "processDayOfRegistrations")
     .addToUi();
+}
+
+/**
+ * Schedules the private, one-minute event-day trigger. Tally writes through its
+ * Google Sheets integration, so an Apps Script form-submit trigger is not
+ * dependable for this workbook.
+ */
+function installDayOfCheckInAutomation() {
+  var event = SOV_CHECKIN.event;
+  var today = formatEventDate_(new Date());
+
+  removeTriggersForHandler_(event.schedulerHandler);
+  removeTriggersForHandler_(event.triggerHandler);
+
+  if (today === event.date) return startDayOfCheckInAutomation();
+  if (today > event.date) {
+    SpreadsheetApp.getActiveSpreadsheet().toast(
+      "The 2026 event date has passed, so no automation was scheduled.",
+      "Steps of Valor",
+      8
+    );
+    return {status: "event-passed", eventDate: event.date};
+  }
+
+  ScriptApp.newTrigger(event.schedulerHandler)
+    .timeBased()
+    .at(new Date(event.activationTime))
+    .create();
+
+  SpreadsheetApp.getActiveSpreadsheet().toast(
+    "Day-of auto check-in is scheduled. It will activate automatically on September 11.",
+    "Steps of Valor",
+    8
+  );
+  return {
+    status: "scheduled",
+    eventDate: event.date,
+    activationTime: event.activationTime
+  };
+}
+
+/**
+ * Starts the one-minute event-day processor and replaces any older copy of the
+ * trigger. This is called automatically just after midnight on September 11.
+ */
+function startDayOfCheckInAutomation() {
+  var event = SOV_CHECKIN.event;
+  var today = formatEventDate_(new Date());
+
+  removeTriggersForHandler_(event.triggerHandler);
+
+  if (today !== event.date) {
+    return {status: "not-event-day", eventDate: event.date, currentDate: today};
+  }
+
+  ScriptApp.newTrigger(event.triggerHandler)
+    .timeBased()
+    .everyMinutes(1)
+    .create();
+
+  var result = processDayOfRegistrations();
+  SpreadsheetApp.getActiveSpreadsheet().toast(
+    "Day-of auto check-in is active. New registrations will be checked in within about one minute.",
+    "Steps of Valor",
+    8
+  );
+  result.status = "active";
+  return result;
+}
+
+/**
+ * Automatically checks in registrations submitted on the event date. Advance
+ * registrations remain unchecked until staff confirms arrival.
+ */
+function processDayOfRegistrations() {
+  var event = SOV_CHECKIN.event;
+  var currentDate = formatEventDate_(new Date());
+  if (currentDate > event.date) {
+    removeTriggersForHandler_(event.triggerHandler);
+    return {status: "complete", eventDate: event.date, updatedCount: 0, updatedRows: []};
+  }
+
+  var lock = LockService.getDocumentLock();
+  lock.waitLock(10000);
+
+  try {
+    var table = getTable_(true);
+    var columns = table.columns;
+    if (columns.submittedAt < 0) {
+      throw new Error("The registration Sheet needs a Submitted at column for day-of auto check-in.");
+    }
+
+    var updatedRows = [];
+    for (var r = 1; r < table.values.length; r += 1) {
+      var row = table.values[r];
+      if (!rowHasData_(row) || isCheckedIn_(getCell_(row, columns.checkedIn))) continue;
+
+      var submittedAt = getDateValue_(getCell_(row, columns.submittedAt));
+      if (!submittedAt || formatEventDate_(submittedAt) !== event.date) continue;
+
+      var rowNumber = r + 1;
+      table.sheet.getRange(rowNumber, columns.checkedIn + 1).setValue(true);
+      table.sheet.getRange(rowNumber, columns.checkInTime + 1)
+        .setValue(submittedAt)
+        .setNumberFormat("m/d/yyyy h:mm AM/PM");
+      table.sheet.getRange(rowNumber, columns.checkedInBy + 1).setValue(event.autoCheckInLabel);
+
+      var existingNote = getCell_(row, columns.notes);
+      if (!existingNote) {
+        table.sheet.getRange(rowNumber, columns.notes + 1).setValue(event.autoCheckInNote);
+      }
+      updatedRows.push(rowNumber);
+    }
+
+    if (updatedRows.length) SpreadsheetApp.flush();
+
+    return {
+      eventDate: event.date,
+      updatedCount: updatedRows.length,
+      updatedRows: updatedRows,
+      processedAt: formatDateTime_(new Date())
+    };
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+function removeTriggersForHandler_(handler) {
+  ScriptApp.getProjectTriggers().forEach(function (trigger) {
+    if (trigger.getHandlerFunction() === handler) {
+      ScriptApp.deleteTrigger(trigger);
+    }
+  });
 }
 
 function openCheckInDesk() {
@@ -100,6 +246,10 @@ function setupCheckInSheet(passcode) {
 
 function getInitialState(passcode) {
   verifyAccess_(passcode);
+
+  // Also catch a just-submitted day-of registration when staff refreshes the
+  // desk before the one-minute trigger has run.
+  processDayOfRegistrations();
 
   var table = getTable_(true);
   return {
@@ -335,6 +485,7 @@ function buildHeaderIndex_(headers) {
 
 function identifyColumns_(index) {
   return {
+    submittedAt: firstColumn_(index, SOV_CHECKIN.aliases.submittedAt),
     fullName: firstColumn_(index, SOV_CHECKIN.aliases.fullName),
     firstName: firstColumn_(index, SOV_CHECKIN.aliases.firstName),
     lastName: firstColumn_(index, SOV_CHECKIN.aliases.lastName),
@@ -448,6 +599,17 @@ function getCell_(row, index) {
   var value = row[index];
   if (value instanceof Date) return value;
   return String(value || "").trim();
+}
+
+function getDateValue_(value) {
+  if (value instanceof Date && !isNaN(value.getTime())) return value;
+
+  var parsed = new Date(value);
+  return isNaN(parsed.getTime()) ? null : parsed;
+}
+
+function formatEventDate_(value) {
+  return Utilities.formatDate(value, SOV_CHECKIN.event.timezone, "yyyy-MM-dd");
 }
 
 function rowHasData_(row) {

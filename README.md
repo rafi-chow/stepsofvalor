@@ -90,7 +90,7 @@ Participant registration is a two-step flow on `register.html`.
 
 - Public form URL: `https://tally.so/r/yP5dO8`
 - Embedded form URL: `https://tally.so/embed/yP5dO8`
-- Required UTA waiver URL: `https://mavengage.uta.edu/submitter/form/step/1?Guid=99b4c727-5b16-4068-b7eb-c6b6f0b80c61`
+- Required UTA waiver URL: `https://mavengage.uta.edu/submitter/form/start/734561`
 - The form collects full name, email, optional phone number, optional organization, and an event agreement checkbox.
 - Submissions are available in the Tally dashboard for the `2026 Steps of Valor Registration` form.
 - Every participant must also complete the UTA MavEngage Participant Release and Indemnification Agreement.

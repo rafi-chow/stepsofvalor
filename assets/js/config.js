@@ -16,7 +16,7 @@ window.SOV_CONFIG = {
   },
   links: {
     registrationFormUrl: "https://tally.so/r/yP5dO8",
-    utaWaiverUrl: "https://mavengage.uta.edu/submitter/form/step/1?Guid=99b4c727-5b16-4068-b7eb-c6b6f0b80c61",
+    utaWaiverUrl: "https://mavengage.uta.edu/submitter/form/start/734561",
     donationUrl: "https://www.spotfund.com/story/bda2a537-c0e3-43a4-8b0c-3c5d12662fa1?source=s&share_location=c&SFID=mqt8v43sc",
     sponsorInterestUrl: "mailto:kappasiguta@gmail.com?subject=Steps%20of%20Valor%20Sponsorship%20Inquiry",
     sponsorPacketUrl: "assets/docs/steps-of-valor-sponsor-packet-2026.pdf"

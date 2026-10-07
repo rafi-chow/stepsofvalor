@@ -2,7 +2,6 @@
   var config = window.SOV_CONFIG || {};
   var links = config.links || {};
   var contact = config.contact || {};
-  var beneficiaries = config.beneficiaries || {};
   var menuButton = document.querySelector("[data-menu-toggle]");
   var nav = document.querySelector("[data-site-nav]");
 
@@ -26,8 +25,6 @@
   setExternalLink("[data-link='uta-waiver']", links.utaWaiverUrl, "register.html");
   setExternalLink("[data-link='sponsor-interest']", links.sponsorInterestUrl, "contact.html");
   setExternalLink("[data-link='sponsor-packet']", links.sponsorPacketUrl, "sponsors.html#sponsor-packet-needed");
-  setExternalLink("[data-link='military-heroes']", beneficiaries.militaryHeroes, "#");
-  setExternalLink("[data-link='arlington-firefighters']", beneficiaries.arlingtonFirefighters, "#");
 
   function toTallyEmbedUrl(value) {
     if (!value) return "";
@@ -139,13 +136,8 @@
   window.addEventListener("Tally.FormSubmitted", scrollToWaiverStep);
 
   document.querySelectorAll("[data-email='contact']").forEach(function (element) {
-    element.href = "mailto:" + (contact.email || "Thaddeus@stepsofvalor.org");
-    element.textContent = contact.email || "Thaddeus@stepsofvalor.org";
-  });
-
-  document.querySelectorAll("[data-email='chapter']").forEach(function (element) {
-    element.href = "mailto:" + (contact.chapterEmail || "kappasiguta@gmail.com");
-    element.textContent = contact.chapterEmail || "kappasiguta@gmail.com";
+    element.href = "mailto:" + (contact.email || "thaddeus@stepsofvalor.org");
+    element.textContent = contact.email || "thaddeus@stepsofvalor.org";
   });
 
   setExternalLink("[data-link='instagram']", contact.instagramUrl, "contact.html");

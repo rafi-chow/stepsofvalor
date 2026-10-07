@@ -11,13 +11,14 @@ Use this before pushing to a public GitHub repo, sending a recruiter link, or de
 - Donation/payment actions link to the approved external Spotfund page.
 - Registration uses the approved external Tally form embedded in the static site.
 - Sponsor packet PDF is intentionally public and organizer-approved.
-- Event photos are approved for public web use.
+- Event photos are approved for public web use, including confirmed publication rights for `assets/images/officer-reflection.jpg`.
 
 ## Content accuracy
 
 - Steps of Valor is described as the organization.
-- The 9/11 Memorial Stair Climb is described as the current event, not the entire organization.
-- Kappa Sigma Theta Omega is described as a community partner.
+- The 9/11 Memorial Stair Climb is described as a program, not the entire organization.
+- Kappa Sigma Theta Omega is described only as a Stair Climb community partner.
+- Planned mental-health and wellness initiatives are not described as active clinical services.
 - Confirmed event details are September 11, 2026, University of Texas at Arlington Maverick Stadium, 6:45 AM event-day check-in, and 8:03 AM start.
 - Unconfirmed logistics are described neutrally until the event team publishes final guidance.
 

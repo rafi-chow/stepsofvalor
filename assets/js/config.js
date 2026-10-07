@@ -10,19 +10,14 @@ window.SOV_CONFIG = {
     address: "1307 W Mitchell St, Arlington, TX 76013"
   },
   contact: {
-    email: "Thaddeus@stepsofvalor.org",
-    chapterEmail: "kappasiguta@gmail.com",
+    email: "thaddeus@stepsofvalor.org",
     instagramUrl: "https://www.instagram.com/stepsofvalor/"
   },
   links: {
     registrationFormUrl: "https://tally.so/r/yP5dO8",
     utaWaiverUrl: "https://mavengage.uta.edu/submitter/form/start/734561",
-    donationUrl: "https://www.spotfund.com/story/bda2a537-c0e3-43a4-8b0c-3c5d12662fa1?source=s&share_location=c&SFID=mqt8v43sc",
-    sponsorInterestUrl: "mailto:kappasiguta@gmail.com?subject=Steps%20of%20Valor%20Sponsorship%20Inquiry",
+    donationUrl: "https://spot.fund/msc16lbsc",
+    sponsorInterestUrl: "mailto:thaddeus@stepsofvalor.org?subject=Steps%20of%20Valor%20Stair%20Climb%20Sponsorship",
     sponsorPacketUrl: "assets/docs/steps-of-valor-sponsor-packet-2026.pdf"
-  },
-  beneficiaries: {
-    militaryHeroes: "https://www.kappasigma.org/military-heroes-campaign/",
-    arlingtonFirefighters: "https://www.arlingtonprofessionalfirefighters.org/"
   }
 };

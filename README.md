@@ -1,6 +1,6 @@
 # Steps of Valor Website
 
-Static website for Steps of Valor, a nonprofit organization supporting first responders and their families. The 2026 Steps of Valor 9/11 Memorial Stair Climb is the current public event.
+Static website for Steps of Valor, an organization developing mental-health resource access, peer connection, wellness education, and community assistance for first responders and their families. These initiatives are planned and are not presented as active clinical services. The 2026 Steps of Valor 9/11 Memorial Stair Climb is a public program of the organization.
 
 Confirmed public details:
 
@@ -11,8 +11,8 @@ Confirmed public details:
 - Venue: University of Texas at Arlington Maverick Stadium, 1307 W Mitchell St, Arlington, TX 76013
 - Donation link: Spotfund fundraiser configured in `assets/js/config.js`
 - Sponsor packet: `assets/docs/steps-of-valor-sponsor-packet-2026.pdf`
-- Public contact: `Thaddeus@stepsofvalor.org`
-- Payment, sponsor, and organizer contact: `kappasiguta@gmail.com`
+- Steps of Valor contact: `thaddeus@stepsofvalor.org`
+- Community partner for the Stair Climb: Kappa Sigma Theta Omega
 
 This project is a static website built with HTML, CSS, JavaScript, and local images. Donations use the official Spotfund fundraiser; participant registration uses an embedded Tally form plus a required UTA MavEngage participant waiver, with event-day check-in beginning at 6:45 AM.
 
@@ -20,7 +20,7 @@ This project is a static website built with HTML, CSS, JavaScript, and local ima
 
 Use a fresh clean repository/export for public GitHub or production source control. Do not publish this working repo’s inherited Git history unless it has been fully audited and any old deploy credentials have been removed from history or rotated.
 
-Approved public content currently includes the Spotfund fundraiser URL, public contact emails, selected event photos, and the 2026 sponsor packet PDF. The sponsor packet has been treated as approved public content by the organizer.
+Approved public content currently includes the Spotfund fundraiser URL, the public Steps of Valor contact, selected event photos, and the 2026 sponsor packet PDF. The sponsor packet has been treated as approved public content by the organizer. Confirm publication rights for `assets/images/officer-reflection.jpg` before the production launch; the demo includes an on-page photographer/publication credit.
 
 Before pushing, run:
 
@@ -72,15 +72,16 @@ npx vercel --prod
 
 No framework preset, build command, or output directory is needed for this project.
 
-## Final deployment to Porkbun
+## Production handoff to Porkbun
 
-Porkbun Static Hosting accepts plain HTML/CSS/JS sites like this one.
+Porkbun Static Hosting accepts plain HTML/CSS/JS sites like this one. The current production domain is owned by Steps of Valor, but this repository does not contain Porkbun credentials and should not attempt to work around account access.
 
-1. Log in to Porkbun and open **Domain Management**.
-2. Find the domain and choose the house icon in the **Website** column.
-3. Select a **Static Hosting** plan.
-4. In the hosting panel, use the file uploader and upload the contents of this project so `index.html` is at the site root. Porkbun also offers FTP or GitHub connection options.
-5. Open the domain and test every navigation item and CTA.
+1. Have the Steps of Valor domain owner create or restore access to the organization’s Porkbun account, then invite the technical owner or securely share access through the organization’s approved password manager.
+2. Log in to Porkbun and open **Domain Management**.
+3. Find `stepsofvalor.org` and choose the house icon in the **Website** column.
+4. Select or open the **Static Hosting** plan.
+5. Upload the approved project contents so `index.html` is at the site root, or connect the approved clean GitHub repository.
+6. Open the domain and repeat the release checklist before changing or announcing the live site.
 
 Do not commit Porkbun/FTP credentials. Keep real credentials only in your password manager or a local ignored file.
 
@@ -118,11 +119,13 @@ This creates a private staff search-and-check-in panel backed by the Sheet. It i
 
 The donation URL, registration form URL, and sponsor packet URL are maintained in `assets/js/config.js`. Event-day check-in begins at 6:45 AM. See `ORGANIZER_CHECKLIST.md` for information the event team may add as it is finalized.
 
+Website stewardship belongs to the Steps of Valor Director of Technology. That role is documented here for maintainers and is intentionally omitted from public website copy.
+
 ## Project map
 
-- `index.html` — homepage
-- `about.html` — mission and featured coverage
-- `event.html` — schedule and event-day information
+- `index.html` — organization-first homepage
+- `about.html` — mission, planned initiatives, and mental-health framing
+- `event.html` — Stair Climb program, schedule, community partner, and event-day information
 - `register.html`, `donate.html`, `sponsors.html`, `merch.html` — action pages
 - `gallery.html` — local event photo gallery
 - `faq.html`, `contact.html`, `privacy.html` — help, official contacts, and privacy policy

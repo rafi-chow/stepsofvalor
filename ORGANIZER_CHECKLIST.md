@@ -9,12 +9,13 @@ This file is for the Steps of Valor team. It is not intended as website copy.
 - The 2026 sponsor packet PDF.
 - The September 11, 2026 event schedule and Maverick Stadium location.
 - Event-day check-in beginning at 6:45 AM.
-- The public contact and organizer contacts.
+- The public Steps of Valor contact.
 
 ## Add when finalized
 
 - Parking, gate entry, arrival, accessibility, safety, and weather guidance.
-- Public language describing how funds are allocated among Steps of Valor and supported causes.
+- Public language describing how Steps of Valor funds are allocated as programs are finalized.
+- Confirmation of publication rights for `assets/images/officer-reflection.jpg` before production launch.
 - Approved sponsor logos.
 - Merchandise photos, pricing, ordering details, and deadlines.
 - Verified attendance, fundraising, or mission-impact figures.
